@@ -1,20 +1,32 @@
-const express = require("express");
-const cors = require('cors');
+const express = require("express")
 const app = express();
-const PORT = process.env.PORT || 3001;
-const sequelize = require('./config/connection')
-const routes = require('./routes');
-// const { createDb } = require("./models/init");
+const PORT = process.env.PORT || 3001
+const db = require('./config/connection')
+const routes = require('./routes')
+
+app.use(express.json())
+app.use(express.urlencoded({extended:true}));
+
+// db.query('CREATE DATABASE blog_hexalud_DB', (err) => {
+//     if (err) {
+//         console.error('Error creating the database:', err);
+//         return;
+//     }
+// }
+// )
 
 
-sequelize.sync().then(()=> console.log("database is ready"))
-// app.get("/pink", (req, res) =>{
-//     res.send("hello!")
-// })
+db.getConnection((err,connection) => {
+    if (err) {
+        console.error('Error conectándose a la base de datos:', err);
+        return;
+    }
+    else{
+        console.log("correctly connected to the database")
+        connection.release();
+    }
+});
 
-app.use(express.json());
-app.use(cors())
-app.use(express.urlencoded({ extended: true }));
+
+app.listen(PORT, () => console.log(`Now listening on port: http://localhost:${PORT}`));
 app.use(routes)
-
-app.listen(PORT,'0.0.0.0',()=>console.log(`Now listening on port:  http://localhost:${PORT}`))

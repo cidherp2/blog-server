@@ -1,22 +1,19 @@
- // connection.js
- require('dotenv').config()
-const { Sequelize } = require("sequelize");
-
-const db_options = {
-  host: process.env.DB_HOST ,
-  dialect: process.env.DB_DIALECT || "mysql",
-  port: process.env.DB_PORT || 3306
-};
-
-const sequelize = process.env.DATABASE_URL
-  ? new Sequelize(process.env.DATABASE_URL)
-  : new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    db_options
-  );
-
-module.exports = sequelize; // Exporta la instancia de Sequelize
+require('dotenv').config()
+const  mysql  = require("mysql2/promise");
 
 
+const db = mysql.createPool(
+    {
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        database:process.env.DB_DATABASE,
+        user:process.env.DB_USER,
+        password:process.env.DB_PASSWORD,
+        waitForConnections: true,
+        connectionLimit:10,
+        queueLimit:0,
+        
+    },
+)
+
+module.exports = db

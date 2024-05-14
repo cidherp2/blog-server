@@ -1,12 +1,6 @@
-const router = require('express').Router();
-const userRoutes = require('./userRoutes')
-const merchRoutes = require('./merchRoutes')
-const ticketRoutes = require('./ticketRoutes')
-const pagoRoutes = require('./pagoRoutes')
+const router = require('express').Router()
+const blogRoutes = require ('./blogRoutes')
 
-router.use('/user',userRoutes)
-router.use('/merch', merchRoutes)
-router.use('/tickets', ticketRoutes)
-router.use('/pago', pagoRoutes)
+router.use('/blogRoutes',blogRoutes)
 
-module.exports = router;
+module.exports =router
