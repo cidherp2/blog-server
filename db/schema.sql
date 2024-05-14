@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS blog_hexalud_DB;
-CREATE DATABASE  blog_hexalud_DB;
+-- DROP DATABASE IF EXISTS blog_hexalud_DB;
+-- CREATE DATABASE  blog_hexalud_DB;
 
-USE blog_hexalud_DB;
+-- USE blog_hexalud_DB;
 
 CREATE TABLE entradas_blog (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
